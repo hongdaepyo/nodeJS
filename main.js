@@ -1,18 +1,18 @@
-var http = require("http");
-http.createServer(function(request, response){
-    /*
-        HTTP 헤더 전송
-        HTTP status : 200 : OK
-        Content Type : text/palin
-    */
+var events = require("events");
 
-    response.writeHead(200, {'Content-Type': 'text/plain'});
+var eventEmitter = new events.EventEmitter();
 
-    /*
-        Response Body 를 "Hello World" 로 설정
-    */
+var connectHandler = function connected() {
+    console.log("Connection successful");
+    eventEmitter.emit("data_received");
+}
 
-    response.end("Hello World\n");
-}).listen(8082);
+eventEmitter.on('connection', connectHandler);
 
-console.log("Server running at http://127.0.0.1:8082");
+eventEmitter.on('data_received', function() {
+    console.log("Data Recevied");
+});
+
+eventEmitter.emit('connection');
+
+console.log("Program has ended");
