@@ -10,5 +10,9 @@
 	"newuser": {
 		"password": "newPass",
 		"name": "steave"
+	},
+	"testuser": {
+		"password": "1234qwer",
+		"name": "dphong"
 	}
 }
